@@ -53,7 +53,7 @@ extension MoviesListViewModel: MoviesListViewModelOutput {
                 
                 switch result {
                 case .success(let movies):
-                    updateMoviesList(moviesList: movies)
+                    updateMoviesList(moviesList: movies, page: Int(page) ?? 1)
                 case .failure(let error):
                     errorRelay.send(error)
                 }
@@ -73,7 +73,7 @@ extension MoviesListViewModel: MoviesListViewModelOutput {
                 
                 switch result {
                 case .success(let movies):
-                    updateMoviesList(moviesList: movies)
+                    updateMoviesList(moviesList: movies, page: Int(page) ?? 1)
                 case .failure(let error):
                     errorRelay.send(error)
                 }
@@ -92,7 +92,7 @@ extension MoviesListViewModel: MoviesListViewModelOutput {
                 
                 switch result {
                 case .success(let movies):
-                    updateMoviesList(moviesList: movies)
+                    updateMoviesList(moviesList: movies, page: Int(page) ?? 1)
                 case .failure(let error):
                     errorRelay.send(error)
                 }
@@ -100,10 +100,7 @@ extension MoviesListViewModel: MoviesListViewModelOutput {
             })
     }
     
-    private func updateMoviesList(moviesList: MoviesList) {
-        
-        guard let page = moviesList.nextPage else { return }
-
+    private func updateMoviesList(moviesList: MoviesList, page: Int) {
         if page == 1 {
             self.moviesList = moviesList
         } else {
